@@ -52,9 +52,13 @@ bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# Use xbacklight to enable backlight controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20
+# Use brightnessctl to enable backlight controls
+# Large steps
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%- 
+# Small steps
+bindsym $mod+XF86MonBrightnessUp exec --no-startup-id brightnessctl set +2
+bindsym $mod+XF86MonBrightnessDown exec --no-startup-id brightnessctl set 2- 
 
 # Use Scrot to take a screenshot of a rectangular area and save it to the clipboard 
 bindsym --release Print exec --no-startup-id scrot -s -e 'xclip -selection clipboard -t image/png -i $f && rm $f' 
