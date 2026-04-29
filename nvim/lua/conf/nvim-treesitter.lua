@@ -1,11 +1,5 @@
 require'nvim-treesitter.configs'.setup{
 
-  autotag = {
-    enable = true,
-    enable_rename = true,
-    enable_close = true,
-    enable_close_on_slash = true,
-  },
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   ensure_installed = { "bash", "c", "lua", "vim", "vimdoc", "query", "javascript", "html", "go", "php", "json", "typescript", "yaml", "sql", "python", "csv", "dockerfile", "css" },
 
@@ -25,15 +19,10 @@ require'nvim-treesitter.configs'.setup{
   highlight = {
     enable = true,
 
-    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
-    -- list of language that will be disabled
-    disable = { "c", "rust" },
-    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+    -- Disable highlight for large files (> 100 KB)
     disable = function(lang, buf)
         local max_filesize = 100 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
         if ok and stats and stats.size > max_filesize then
             return true
         end

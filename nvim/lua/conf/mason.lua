@@ -1,11 +1,11 @@
-require('mason').setup({})
+require("mason").setup()
 require('mason-lspconfig').setup({
-  -- Replace the language servers listed here
-  -- with the ones you want to install
-  ensure_installed = {"bashls", "cssls", "dockerls", "gopls", "html", "tsserver", "jsonls", "intelephense", "pyright", "sqlls"},
+  ensure_installed = {"bashls", "cssls", "dockerls", "gopls", "html", "jsonls", "intelephense"},
   handlers = {
     function(server_name)
-      require('lspconfig')[server_name].setup({})
+      require('lspconfig')[server_name].setup({
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      })
     end,
   }
 })
