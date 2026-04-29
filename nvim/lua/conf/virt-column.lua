@@ -1,5 +1,5 @@
 require("virt-column").setup({
     char = "|",
-    virtcolumn = "+1,120"
+    virtcolumn = "80,120"
 }
 )
